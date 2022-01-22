@@ -40,6 +40,10 @@
     color: var(--jw-secondary-color);
 }
 
+.formBG {
+    background-color: rgb(188, 246, 248);
+}
+
 
 /* --------------------------BUTTON STYLES OVERRIDE BOOTSTRAP STYLES---------------- */
 .btn-outline-primary {
