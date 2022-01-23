@@ -59,7 +59,7 @@
                     <form class="container form-group shadow formBG py-2">
                         <div class="mb-3">
                             <label for="loanAmount" class="form-label">Loan Amount:</label>
-                            <input type="number" min="1" max="1000000" class="form-control" id="loanAmount" placeholder="Enter Amount">
+                            <input type="number" min="1" max="1000000" class="form-control" id="loanAmount" placeholder="Enter Amount" autofocus>
                         </div>
                         <div class="mb-3">
                             <label for="payments" class="form-label">Number of Monthly Payments:</label>
@@ -82,19 +82,19 @@
                         </tr>
                         <tr>
                             <td></td>
-                            <td id="menuTotal" class="d-flex justify-content-end"><h1>total of everything</h1></td>
+                            <td id="monthlyTotal" class="d-flex justify-content-end"><h1>$0.00</h1></td>
                         </tr>
                         <tr>
                             <td>TOTAL PRINCIPAL</td>
-                            <td id="totalPrincipal" class="ps-5 d-flex justify-content-center">0</td>
+                            <td id="totalPrincipal" class="ps-5 d-flex justify-content-center">$0</td>
                         </tr>
                         <tr>
                             <td>TOTAL INTEREST</td>
-                            <td id="totalInterest" class="ps-5 d-flex justify-content-center">0</td>
+                            <td id="totalInterest" class="ps-5 d-flex justify-content-center">$0</td>
                         </tr>
                         <tr>
                             <td>TOTAL COST</td>
-                            <td id="totalCost" class="ps-5 d-flex justify-content-center">0</td>
+                            <td id="totalCost" class="ps-5 d-flex justify-content-center">$0</td>
                         </tr>
                     </table>
                 </div>
@@ -169,6 +169,7 @@
 
     <script>
         document.getElementById("getDebt").addEventListener("click", getUserInput);
+        document.getElementById("getDebt").addEventListener("click", displayPayment);
     </script>
 
 
