@@ -10,9 +10,11 @@ function getUserInput () {
     interestRate = parseInt(interestRate);
     howManyMonths = parseInt(howManyMonths);
 
-    // check if they are in fact INTEGERS !
+    // check if they are INTEGERS !
 
     if(Number.isInteger(loanAmount, interestRate, howManyMonths)) {
+
+        
 
         
 
