@@ -14,7 +14,7 @@
    <!-- Convert this to an external style sheet -->
 
    <link href="css/site.css" rel="stylesheet">
-    <link rel="icon" type="image/png" href="img/favicon-32x32.png" />
+    <link rel="icon" type="image/png" href="img/favicon.ico" />
 
    <script src="https://kit.fontawesome.com/5db21ba9c6.js" crossorigin="anonymous"></script>
 
@@ -25,7 +25,7 @@
 <nav class="navbar navbar-expand-md fixed-top navbarBG navbar-dark">
     <div class="container-fluid">
         <a class="navbar-brand" href="index.html">
-            <img src="img/MspectreMark.svg" height="24" class="d-inline-block align-text-top"/>
+            <img src="img/favicon.ico" height="24" class="d-inline-block align-text-top"/>
             Mortgage Calculator Pro
         </a>
         <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarCollapse"
@@ -67,7 +67,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="rate" class="form-label">Your Rate:</label>
-                            <input type="number" min="0" max="100" step=".1" class="form-control" id="interestRate" placeholder="Percentage">
+                            <input type="number" min="0" max="100" step="" class="form-control" id="interestRate" placeholder="Percentage">
                         </div>
                         <div class="d-flex justify-content-end p-2">
                            <button id="getDebt" class="btn btn-outline-danger" type="submit">SEE DEBT</button>
@@ -86,15 +86,15 @@
                         </tr>
                         <tr>
                             <td>TOTAL PRINCIPAL</td>
-                            <td id="totalPrincipal" class="ps-5 d-flex justify-content-center">100</td>
+                            <td id="totalPrincipal" class="ps-5 d-flex justify-content-center">0</td>
                         </tr>
                         <tr>
                             <td>TOTAL INTEREST</td>
-                            <td id="totalInterest" class="ps-5 d-flex justify-content-center">100</td>
+                            <td id="totalInterest" class="ps-5 d-flex justify-content-center">0</td>
                         </tr>
                         <tr>
                             <td>TOTAL COST</td>
-                            <td id="totalCost" class="ps-5 d-flex justify-content-center">100</td>
+                            <td id="totalCost" class="ps-5 d-flex justify-content-center">0</td>
                         </tr>
                     </table>
                 </div>
@@ -129,7 +129,7 @@
                     </div>
                 </div>
                 <div class="col d-flex align-items-center justify-content-start justify-content-lg-center">
-                   <span>Built Back Better, Joe W.</span> <!-- <img src="img/OrangeWhiteMark.svg" /> -->
+                   <span>Built Back Better, Joe W.</span>
                 </div>
                 <div class="col d-flex align-items-center justify-content-start justify-content-lg-end">
                     <div class="row">
