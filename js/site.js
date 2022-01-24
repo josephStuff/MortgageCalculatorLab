@@ -23,8 +23,8 @@ function getUserInput() {
 
         // calcInterestRate(interestRate);
 
-        let monthlyPayment = calcMonthlyPayment(loanAmount, interestRate, howManyMonths);    
-        document.getElementById("monthlyTotal").innerHTML = monthlyTotal.toLocaleString();
+        let monthlyPayment = calcMonthlyPayment(loanAmount, interestRate, howManyMonths);
+        document.getElementById("monthlyPayment").innerHTML = monthlyPayment.toLocaleString();
 
         let monthlyInterestRate =  calcInterestRate(interestRate);
         
@@ -45,11 +45,7 @@ function getUserInput() {
         imageAlt: "Custom image",
       });
 
-      
-
     }
-
-      
 
 }
 
@@ -78,7 +74,7 @@ function calcInterest (balance, interestRate) {
 // function displayPayments(totalPrincipal, totalInterest, totalCost) {
  
 //   totalPrincipal = parseInt(document.getElementById("loanAmount").value);
-//   totalInterest = (monthlyTotal * howManyMonths) - loanAmount;
+//   totalInterest = (monthlyPayment * howManyMonths) - loanAmount;
 //   totalCost = totalPrincipal + totalInterest;
 
 
@@ -112,7 +108,7 @@ function displayPayments (currentPayments, loanAmount, monthlyPayment) {
 
         paymentCols[0].textContent = currentPayments[index].month;
         paymentCols[1].textContent = currenceyFormatter.format(currentPayments[index].payment.toFixed(2));
-        paymentCols[2].textContent = currenceyFormatter.format(currentPayments[index].loanAmount.toFixed(2));
+        paymentCols[2].textContent = currenceyFormatter.format(currentPayments[index].principal.toFixed(2));
         paymentCols[3].textContent = currenceyFormatter.format(currentPayments[index].interest.toFixed(2));
         paymentCols[4].textContent = currenceyFormatter.format(currentPayments[index].totalInterest.toFixed(2));
         paymentCols[5].textContent = currenceyFormatter.format(currentPayments[index].balance.toFixed(2));
@@ -126,7 +122,7 @@ function displayPayments (currentPayments, loanAmount, monthlyPayment) {
       currency: "USD",
     });
 
-    let labelInterestRate = document.getElementById("interest");
+    let labelInterestRate = document.getElementById("interestRate");
     labelInterestRate.innerHTML = Number(interestRate).toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
@@ -134,18 +130,19 @@ function displayPayments (currentPayments, loanAmount, monthlyPayment) {
     
     let labelTotalInterest = document.getElementById("totalInterest");
     labelTotalInterest.innerHTML = Number(totalInterest).toLocaleString("en-US", {
+        style: "currency",
+        currency: "USD",
+      }
+    );
+
+    let labelMonthlyPayment = document.getElementById("monthlyPayment");
+    labelMonthlyPayment.innerHTML = Number(monthlyPayment).toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
     });
 
-    let labelCurrentPayments = document.getElementById("currentPayments");
-    labelCurrentPayments.innerHTML = Number(currentPayments).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-
-    let labelBalance = document.getElementById("balance");
-    labelBalance.innerHTML = Number(balance).toLocaleString("en-US", {
+    let labelPrincipal = document.getElementById("principal");
+    labelPrincipal.innerHTML = Number(principal).toLocaleString("en-US", {
       style: "currency",
       currency: "USD",
     })
@@ -163,7 +160,7 @@ function getAllPayments (loanAmount, interestRate, howManyMonths, monthlyPayment
     let totalInterest = 0;
     let monthlyPrincipal = 0;
     let monthlyInterest = 0;
-    monthlyTotalInterest = 0;
+    monthlyPaymentInterest = 0;
 
     for (let month = 0; month <= howManyMonths; month++) {
       
