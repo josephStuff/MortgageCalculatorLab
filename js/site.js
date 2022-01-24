@@ -25,10 +25,14 @@ function getUserInput() {
     }
 
     else {
-        Swal.fire({
-        icon: 'error',
-        title: 'Ooops...',
-        text: 'Numbers Only Please!!!!'});
+    Swal.fire({
+      title: "Incorrect!",
+      text: "Only Number Please!",
+      imageUrl: "https://unsplash.it/400/200",
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image",
+    });
 
     }
 
