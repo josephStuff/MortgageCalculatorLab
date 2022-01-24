@@ -1,188 +1,166 @@
 
 
 
+
 function getUserInput() {
+  let loanAmount = [];
+  let howManyMonths = [];
+  let interestRate = [];
 
-    let loanAmount = [];
-    let howManyMonths = [];
-    let interestRate = [];
+  loanAmount = document.getElementById("loanAmount").value;
+  howManyMonths = document.getElementById("howManyMonths").value;
+  interestRate = document.getElementById("interestRate").value;
 
-    loanAmount = document.getElementById("loanAmount").value;
-    howManyMonths = document.getElementById("howManyMonths").value;
-    interestRate = document.getElementById("interestRate").value; 
+  loanAmount = Number(loanAmount);
+  interestRate = parseFloat(interestRate);
+  howManyMonths = parseInt(howManyMonths);
+
+  // check if they are INTEGERS !
+
+  if (Number(loanAmount && interestRate && howManyMonths)) {
+    // calcInterestRate(interestRate);
+
+    let monthlyPayment = calcMonthlyPayment(loanAmount, interestRate, howManyMonths);
+    document.getElementById("monthlyPayment").innerHTML = monthlyPayment.toLocaleString();
+
+    let monthlyInterestRate = calcInterestRate(interestRate);
+
+    let totalPrincipal = parseInt(document.getElementById("loanAmount").value);
+    let totalInterest = monthlyPayment * howManyMonths - loanAmount;
+    let totalCost = totalPrincipal + totalInterest;
+
+    document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
+    document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString();
+    document.getElementById("totalCost").innerHTML = totalCost.toLocaleString();
+    document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
+    document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString();
+    document.getElementById("totalCost").innerHTML = totalCost.toLocaleString();
 
 
-    loanAmount = Number(loanAmount);
-    interestRate = parseFloat(interestRate);
-    howManyMonths = parseInt(howManyMonths);
+    let payments = getAllPayments(loanAmount, monthlyInterestRate, howManyMonths, monthlyPayment);
+    displayPayments(payments, loanAmount, monthlyPayment);
 
 
-    // check if they are INTEGERS !
-
-    if (Number(loanAmount, interestRate, howManyMonths)) {
-
-        // calcInterestRate(interestRate);
-
-        let monthlyPayment = calcMonthlyPayment(loanAmount, interestRate, howManyMonths);
-        document.getElementById("monthlyPayment").innerHTML = monthlyPayment.toLocaleString();
-
-        let monthlyInterestRate =  calcInterestRate(interestRate);
-        
-
-        let payments = getAllPayments(loanAmount, monthlyInterestRate, howManyMonths, monthlyPayment);   
-        displayPayments(payments, loanAmount, monthlyPayment);
-
-    }
-
-    else {
-
-      Swal.fire({
-        title: "Incorrect!",
-        text: "Only Numbers Please!",
-        imageUrl: "https://unsplash.it/400/200",
-        imageWidth: 400,
-        imageHeight: 200,
-        imageAlt: "Custom image",
-      });
-
-    }
-
+  } else {
+    Swal.fire({
+      title: "Incorrect!",
+      text: "Only Numbers Please!",
+      imageUrl: "https://unsplash.it/400/200",
+      imageWidth: 400,
+      imageHeight: 200,
+      imageAlt: "Custom image",
+    });
+  }
 }
 
+function calcPrincipalPayments() {}
 
-function calcPrincipalPayments () {
-
+function calcInterestRate(interestRate) {
+  return interestRate / 1200; //   -------------  alternative method  -------------------
 }
 
-function calcInterestRate (interestRate) {
-  return (interestRate / 1200);          //   -------------  alternative method  -------------------
-}
-
-
-function calcMonthlyPayment (loanAmount, interestRate, howManyMonths) {
-
+function calcMonthlyPayment(loanAmount, interestRate, howManyMonths) {
   let rate = interestRate / 1200;
-  return (rate * loanAmount) / (1 - (Math.pow(1 + rate,-howManyMonths)));
-
+  return (rate * loanAmount) / (1 - Math.pow(1 + rate, -howManyMonths));
 }
 
-function calcInterest (balance, interestRate) {
+function calcInterest(balance, interestRate) {
   return balance * interestRate;
 }
 
 
-// function displayPayments(totalPrincipal, totalInterest, totalCost) {
- 
-//   totalPrincipal = parseInt(document.getElementById("loanAmount").value);
-//   totalInterest = (monthlyPayment * howManyMonths) - loanAmount;
-//   totalCost = totalPrincipal + totalInterest;
 
+function displayPayments(currentPayments, monthlyPrincipal, monthlyPayment) {
+  let debtBody = document.getElementById("debtBody");
+  let template = document.getElementById("payment_template");
 
-//   document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
-//   document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString();
-//   document.getElementById("totalCost").innerHTML = totalCost.toLocaleString();
+  //  -----------------------  CLEARS TABLE OF PREVIOUS DATA -------------------
+  debtBody.innerHTML = "";
 
-//   let payments = [];
+  // ---------------- CONFIGURE CURRENCY FORMATTER --------------------------------
+  let currenceyFormatter = new Intl.NumberFormat("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
 
-// }
+  for (let index = 0; index < currentPayments.length; index++) {
+    // const element = array[index];
+    let paymentRow = template.content.cloneNode(true);
+    let paymentCols = paymentRow.querySelectorAll("td");
 
-function displayPayments (currentPayments, loanAmount, monthlyPayment) {
+    paymentCols[0].textContent = currentPayments[index].month;
+    paymentCols[1].textContent = currenceyFormatter.format(currentPayments[index].payment.toFixed(2));
+    paymentCols[2].textContent = currenceyFormatter.format(currentPayments[index].principal.toFixed(2));
+    paymentCols[3].textContent = currenceyFormatter.format(currentPayments[index].interest.toFixed(2));
+    paymentCols[4].textContent = currenceyFormatter.format(currentPayments[index].totalInterest.toFixed(2));
+    paymentCols[5].textContent = currenceyFormatter.format(currentPayments[index].balance.toFixed(2));
 
-    let debtBody = document.getElementById("debtBody");
-    let template = document.getElementById("payment_template");
+    debtBody.appendChild(paymentRow);
+  }
 
-      //  -----------------------  CLEARS TABLE OF PREVIOUS DATA -------------------
-    debtBody.innerHTML = "";
+  let labelLoanAmount = document.getElementById("loanAmount");
+  labelLoanAmount.innerHTML = Number(loanAmount).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
 
-    // ---------------- CONFIGURE CURRENCY FORMATTER --------------------------------
-    let currenceyFormatter = new Intl.NumberFormat('en-US', {
-      style: 'currency',
-      currency: 'USD',
-    });
+  let labelInterestRate = document.getElementById("interestRate");
+  labelInterestRate.innerHTML = Number(interestRate).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
 
+  let labelTotalInterest = document.getElementById("totalInterest");
+  labelTotalInterest.innerHTML = Number(totalInterest).toLocaleString("en-US", {
+    style: "currency",
+    currency: "USD",
+  });
 
-    for (let index = 0; index < currentPayments.length; index++) {
-        // const element = array[index];
-        let paymentRow = template.content.cloneNode(true);
-        let paymentCols = paymentRow.querySelectorAll("td");
-
-        paymentCols[0].textContent = currentPayments[index].month;
-        paymentCols[1].textContent = currenceyFormatter.format(currentPayments[index].payment.toFixed(2));
-        paymentCols[2].textContent = currenceyFormatter.format(currentPayments[index].principal.toFixed(2));
-        paymentCols[3].textContent = currenceyFormatter.format(currentPayments[index].interest.toFixed(2));
-        paymentCols[4].textContent = currenceyFormatter.format(currentPayments[index].totalInterest.toFixed(2));
-        paymentCols[5].textContent = currenceyFormatter.format(currentPayments[index].balance.toFixed(2));
-
-        debtBody.appendChild(paymentRow);
+  let labelMonthlyPayment = document.getElementById("monthlyPayment");
+  labelMonthlyPayment.innerHTML = Number(monthlyPayment).toLocaleString(
+    "en-US",
+    {
+      style: "currency",
+      currency: "USD",
     }
+  );
 
-    let labelLoanAmount = document.getElementById("loanAmount");
-    labelLoanAmount.innerHTML = Number(loanAmount).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-
-    let labelInterestRate = document.getElementById("interestRate");
-    labelInterestRate.innerHTML = Number(interestRate).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-    
-    let labelTotalInterest = document.getElementById("totalInterest");
-    labelTotalInterest.innerHTML = Number(totalInterest).toLocaleString("en-US", {
-        style: "currency",
-        currency: "USD",
-      }
-    );
-
-    let labelMonthlyPayment = document.getElementById("monthlyPayment");
-    labelMonthlyPayment.innerHTML = Number(monthlyPayment).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    });
-
-    let labelPrincipal = document.getElementById("principal");
-    labelPrincipal.innerHTML = Number(principal).toLocaleString("en-US", {
-      style: "currency",
-      currency: "USD",
-    })
-
-
+  
 }
 
+function getAllPayments(
+  loanAmount,
+  interestRate,
+  howManyMonths,
+  monthlyPayment
+) {
 
+  let allPayments = [];
 
-function getAllPayments (loanAmount, interestRate, howManyMonths, monthlyPayment) {          //    alternative method
+  let balance = loanAmount;
+  let totalInterest = 0;
+  let monthlyPrincipal = 0;
+  let monthlyInterest = 0;
+  monthlyPaymentInterest = 0;
 
-    let allPayments = [];
+  for (let month = 0; month <= howManyMonths; month++) {
+    monthlyInterest = calcInterest(balance, interestRate);
+    totalInterest += monthlyInterest;
+    monthlyPrincipal = monthlyPayment - monthlyInterest;
+    balance = Math.abs(balance - monthlyPrincipal);
 
-    let balance = loanAmount;
-    let totalInterest = 0;
-    let monthlyPrincipal = 0;
-    let monthlyInterest = 0;
-    monthlyPaymentInterest = 0;
+    //   --------------------------------- ADD THE DETAILS TO AN OBJECT ----------------
+    let curPayment = {
+      month: month,
+      payment: monthlyPayment,
+      principal: monthlyPrincipal,
+      interest: monthlyInterest,
+      totalInterest: totalInterest,
+      balance: balance,
+    };
 
-    for (let month = 0; month <= howManyMonths; month++) {
-      
-      monthlyInterest = calcInterest(balance, interestRate);
-      totalInterest += monthlyInterest;
-      monthlyPrincipal = monthlyPayment - monthlyInterest;
-      balance = Math.abs(balance - monthlyPrincipal);
+    allPayments.push(curPayment);
+  }
 
-      //   --------------------------------- ADD THE DETAILS TO AN OBJECT ----------------
-      let curPayment = {
-        month: month,
-        payment: monthlyPayment,
-        principal: monthlyPrincipal,
-        interest: monthlyInterest,
-        totalInterest: totalInterest,
-        balance: balance,
-      };
-      
-      allPayments.push(curPayment);
-
-    }
-
-    return allPayments;
-    
+  return allPayments;
 }
