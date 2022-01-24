@@ -51,18 +51,32 @@ function displayPayment() {
 
 function displayToTable () {
 
-    let locationOfList = document.getElementById("debtBody");
-    let templateForList = document.getElementById("")
+    let debtBody = document.getElementById("debtBody");
+    let listNames_template = document.getElementById("listNames_template")
 
+    debtBody.innerHTML = "";
 
+    let currentPayments = JSON.parse(localStorage.getItem("paymentArray")) || [];
 
-    for (let index = 0; index < array.length; index++) {
-        const element = array[index];
-        
+    if (currentPayments == 0) {
+        currentPayments = debts;
+        localStorage.setItem("paymentArray", JSON.stringify(currentPayments));
     }
 
-    let row = `<tr><td class="${className}">${number}</td></tr>`;
-    templateRows += row;
+    for (let index = 0; index < currentPayments.length; index++) {
+        // const element = array[index];
+        let paymentRow = document.importNode(listNames_template.content, true);
+        let paymentCols = paymentRow.querySelectorAll("td");
+
+        paymentCols[0].textContent = currentPayments[index].month;
+        paymentCols[1].textContent = currentPayments[index].payment;
+        paymentCols[2].textContent = currentPayments[index].principal;
+        paymentCols[3].textContent = currentPayments[index].interest;
+        paymentCols[4].textContent = currentPayments[index].totalInterest;
+        paymentCols[5].textContent = currentPayments[index].balance;
+
+        debtBody.appendChild(paymentRow);
+    }
 
 
 }
