@@ -46,10 +46,10 @@
 
 
 /* --------------------------BUTTON STYLES OVERRIDE BOOTSTRAP STYLES---------------- */
-.btn-outline-primary {
+/* .btn-outline-primary {
     color: var(--jw-primary-color);
     border-color: var(--jw-secondary-color) ;
-}
+} */
 
 .btn-outline-primary:hover,
 .btn-outline-primary:active,

@@ -70,7 +70,7 @@
                             <input type="number" min="0" max="100" step=".1" class="form-control" id="interestRate" placeholder="Percentage">
                         </div>
                         <div class="d-flex justify-content-end p-2">
-                           <button id="getDebt" class="btn btn-outline-danger" type="submit">SEE DEBT</button>
+                           <button id="getDebt" class="btn btn-outline-primary" type="button">SEE DEBT</button>
                         </div>
                     </form>
                 </div>
@@ -90,7 +90,7 @@
                         </tr>
                         <tr>
                             <td>TOTAL INTEREST</td>
-                            <td id="totalInterest" class="ps-5 d-flex justify-content-center">$0</td>
+                            <td id="totalInterest" class="ps-5 d-flex justify-content-center" type="float">$0</td>
                         </tr>
                         <tr>
                             <td>TOTAL COST</td>
@@ -186,7 +186,7 @@
     <script>
         document.getElementById("getDebt").addEventListener("click", getUserInput);
         document.getElementById("getDebt").addEventListener("click", displayPayment);
-        document.getElementById("getDebt").addEventListener("click", displayToTable);
+        // document.getElementById("getDebt").addEventListener("click", displayToTable);
     </script>
 
 
