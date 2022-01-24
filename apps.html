@@ -67,7 +67,7 @@
                         </div>
                         <div class="mb-3">
                             <label for="rate" class="form-label">Your Rate:</label>
-                            <input type="number" min="0" max="100" step="" class="form-control" id="interestRate" placeholder="Percentage">
+                            <input type="number" min="0" max="100" step=".1" class="form-control" id="interestRate" placeholder="Percentage">
                         </div>
                         <div class="d-flex justify-content-end p-2">
                            <button id="getDebt" class="btn btn-outline-danger" type="submit">SEE DEBT</button>
@@ -100,7 +100,7 @@
                 </div>
             </div>
              <div class="row">
-                <table class="table table-striped" id="eventData">
+                <table class="table table-striped" id="listData">
                     <thead>
                         <tr class="table-dark">
                             <th>Month</th>
@@ -112,7 +112,7 @@
                         </tr>
                     </thead>
                     <tbody id="debtBody">
-                        <!-- -------DEBT GOES HERE ------ -->
+                        <!-- -------DEBT GOES HERE --------------------- -->
                     </tbody>
                 </table>
             </div>
@@ -154,6 +154,22 @@
         </div>
     </footer>
 
+    <!--  ---------------------------TABLE LIST INFORMATION GOES HERE -------------- -->
+    <template id="listNames-template">
+        <tr>
+            <td data-id="month"></td>
+            <td data-id="payment"></td>
+            <td data-id="principal"></td>
+            <td data-id="interest"></td>
+            <td data-id="totalInterest"></td>
+            <td data-id="balance"></td>
+        </tr>
+    </template>
+
+    <template id="list-template">
+        <li><a class="dropdown-item" onclick="getEvents(this)"></a></li>
+    </template>
+
     <!-- Bootstrap JS -->
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.1.1/dist/js/bootstrap.bundle.min.js"
         integrity="sha384-/bQdsTh/da6pkI1MST/rWKFNjaCP5gBSY4sEBT38Q/9RBh9AH40zEOg7Hlq2THRZ" crossorigin="anonymous">
@@ -170,6 +186,7 @@
     <script>
         document.getElementById("getDebt").addEventListener("click", getUserInput);
         document.getElementById("getDebt").addEventListener("click", displayPayment);
+        document.getElementById("getDebt").addEventListener("click", displayToTable);
     </script>
 
 
