@@ -26,16 +26,13 @@ function getUserInput() {
     let monthlyInterestRate = calcInterestRate(interestRate);
 
     let totalPrincipal = parseInt(document.getElementById("loanAmount").value);
-    let totalInterest = monthlyPayment * howManyMonths - loanAmount;
+    let totalInterest = (monthlyPayment * howManyMonths) - loanAmount;
     let totalCost = totalPrincipal + totalInterest;
 
     document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
     document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString();
     document.getElementById("totalCost").innerHTML = totalCost.toLocaleString();
-    document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
-    document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString();
-    document.getElementById("totalCost").innerHTML = totalCost.toLocaleString();
-
+    
 
     let payments = getAllPayments(loanAmount, monthlyInterestRate, howManyMonths, monthlyPayment);
     displayPayments(payments, loanAmount, monthlyPayment);
