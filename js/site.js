@@ -26,7 +26,7 @@ function getUserInput() {
     let monthlyInterestRate = calcInterestRate(interestRate);
 
     let totalPrincipal = parseInt(document.getElementById("loanAmount").value);
-    let totalInterest = (monthlyPayment * howManyMonths) - loanAmount;
+    let totalInterest = 1000;
     let totalCost = totalPrincipal + totalInterest;
 
     document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
@@ -125,12 +125,7 @@ function displayPayments(currentPayments, monthlyPrincipal, monthlyPayment) {
   
 }
 
-function getAllPayments(
-  loanAmount,
-  interestRate,
-  howManyMonths,
-  monthlyPayment
-) {
+function getAllPayments(loanAmount, interestRate, howManyMonths, monthlyPayment) {
 
   let allPayments = [];
 
@@ -140,7 +135,7 @@ function getAllPayments(
   let monthlyInterest = 0;
   monthlyPaymentInterest = 0;
 
-  for (let month = 0; month <= howManyMonths; month++) {
+  for (let month = 1; month <= howManyMonths; month++) {
     monthlyInterest = calcInterest(balance, interestRate);
     totalInterest += monthlyInterest;
     monthlyPrincipal = monthlyPayment - monthlyInterest;
@@ -153,7 +148,7 @@ function getAllPayments(
       principal: monthlyPrincipal,
       interest: monthlyInterest,
       totalInterest: totalInterest,
-      balance: balance,
+      balance: balance
     };
 
     allPayments.push(curPayment);
