@@ -6,13 +6,14 @@
     --jw-primary-color: #001ef3;
     --jw-secondary-color: #ff993b;
     --jw-green-color: green;
+
 }
 
-/* main>.container {
-    padding: 60px 15px 0;
+main>.container {
+    padding: 20px 15px 0;
     margin-bottom: 5rem;
     min-height: 90vh;
-} */
+}
 
 /* --------------------------NAV BAR -------------------- */
 
@@ -37,11 +38,16 @@
 }
 
 .checklisticon {
-    color: var(--jw-secondary-color);
+    color: red;
 }
 
 .formBG {
     background-color: rgb(188, 246, 248);
+}
+
+.biggerMonthPayment {
+    font-size: 4rem;
+    font-weight: 500;
 }
 
 

@@ -1,7 +1,6 @@
 
 
 
-
 function getUserInput() {
   let loanAmount = [];
   let howManyMonths = [];
@@ -26,7 +25,7 @@ function getUserInput() {
     let monthlyInterestRate = calcInterestRate(interestRate);
 
     let totalPrincipal = parseInt(document.getElementById("loanAmount").value);
-    let totalInterest = 1000;
+    let totalInterest = 100;
     let totalCost = totalPrincipal + totalInterest;
 
     document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
@@ -53,7 +52,7 @@ function getUserInput() {
 function calcPrincipalPayments() {}
 
 function calcInterestRate(interestRate) {
-  return interestRate / 1200; //   -------------  alternative method  -------------------
+  return interestRate / 1200;                 //   -----  alternative method  -------------------
 }
 
 function calcMonthlyPayment(loanAmount, interestRate, howManyMonths) {
