@@ -23,14 +23,6 @@ function getUserInput() {
     document.getElementById("monthlyPayment").innerHTML = monthlyPayment.toLocaleString();
 
     let monthlyInterestRate = calcInterestRate(interestRate);
-
-    let totalPrincipal = parseInt(document.getElementById("loanAmount").value);
-    let totalInterest = 100;
-    let totalCost = totalPrincipal + totalInterest;
-
-    document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
-    document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString();
-    document.getElementById("totalCost").innerHTML = totalCost.toLocaleString();
     
 
     let payments = getAllPayments(loanAmount, monthlyInterestRate, howManyMonths, monthlyPayment);
@@ -78,9 +70,8 @@ function displayPayments(currentPayments, monthlyPrincipal, monthlyPayment) {
     style: "currency",
     currency: "USD",
   });
-
+  let totalInterest = currentPayments[currentPayments.length - 1].totalInterest;
   for (let index = 0; index < currentPayments.length; index++) {
-    // const element = array[index];
     let paymentRow = template.content.cloneNode(true);
     let paymentCols = paymentRow.querySelectorAll("td");
 
@@ -120,6 +111,13 @@ function displayPayments(currentPayments, monthlyPrincipal, monthlyPayment) {
       currency: "USD",
     }
   );
+
+    let totalPrincipal = parseInt(document.getElementById("loanAmount").value);
+    let totalCost = totalPrincipal + totalInterest;
+
+    document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
+    document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString();
+    document.getElementById("totalCost").innerHTML = totalCost.toLocaleString();
 
   
 }
