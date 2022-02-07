@@ -115,9 +115,9 @@ function displayPayments(currentPayments, monthlyPrincipal, monthlyPayment) {
     let totalPrincipal = parseInt(document.getElementById("loanAmount").value);
     let totalCost = totalPrincipal + totalInterest;
 
-    document.getElementById("totalPrincipal").innerHTML = totalPrincipal.toLocaleString();
-    document.getElementById("totalInterest").innerHTML = totalInterest.toLocaleString();
-    document.getElementById("totalCost").innerHTML = totalCost.toLocaleString();
+    document.getElementById("totalPrincipal").innerHTML = currenceyFormatter.format(totalPrincipal.toFixed(2));
+    document.getElementById("totalInterest").innerHTML = currenceyFormatter.format(totalInterest.toFixed(2));
+    document.getElementById("totalCost").innerHTML = currenceyFormatter.format(totalCost.toFixed(2));
 
   
 }
